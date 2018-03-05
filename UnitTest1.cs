@@ -4,27 +4,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.IO;
 
-
+//РўРµСЃС‚С‹
 namespace Stock_Market_UnitTests
 {
     [TestClass]
     public class TCCustomer_account
     {
-        //База для теста
+        //ГЃГ Г§Г  Г¤Г«Гї ГІГҐГ±ГІГ 
         CController.CCustomer_account TestCustomer = new CController.CCustomer_account("TestClient	1000	130	240	760	320");
         public void Equal_Account(CController.CCustomer_account pAccount, string Pname, int pMoney, int pA, int pB, int pC, int pD)
         {
-            //Имя клиента
+            //Г€Г¬Гї ГЄГ«ГЁГҐГ­ГІГ 
             Assert.AreEqual(pAccount.Name, Pname);
-            //Счет в $
+            //Г‘Г·ГҐГІ Гў $
             Assert.AreEqual(pAccount.Money, pMoney);
-            //Количество ценных бумаг A (0)
+            //ГЉГ®Г«ГЁГ·ГҐГ±ГІГўГ® Г¶ГҐГ­Г­Г»Гµ ГЎГіГ¬Г ГЈ A (0)
             Assert.AreEqual(pAccount.Stock[0], pA);
-            //Количество ценных бумаг B (1)
+            //ГЉГ®Г«ГЁГ·ГҐГ±ГІГўГ® Г¶ГҐГ­Г­Г»Гµ ГЎГіГ¬Г ГЈ B (1)
             Assert.AreEqual(pAccount.Stock[1], pB);
-            //Количество ценных бумаг C (2)
+            //ГЉГ®Г«ГЁГ·ГҐГ±ГІГўГ® Г¶ГҐГ­Г­Г»Гµ ГЎГіГ¬Г ГЈ C (2)
             Assert.AreEqual(pAccount.Stock[2], pC);
-            //Количество ценных бумаг D (3)
+            //ГЉГ®Г«ГЁГ·ГҐГ±ГІГўГ® Г¶ГҐГ­Г­Г»Гµ ГЎГіГ¬Г ГЈ D (3)
             Assert.AreEqual(pAccount.Stock[3], pD);
         }
         [TestMethod]
@@ -33,7 +33,7 @@ namespace Stock_Market_UnitTests
             Assert.AreEqual(TestCustomer.FieldsToString(), "TestClient	1000	130	240	760	320");
         }
         [TestMethod]
-        //Создание счета клиента на основе файловой записи
+        //Г‘Г®Г§Г¤Г Г­ГЁГҐ Г±Г·ГҐГІГ  ГЄГ«ГЁГҐГ­ГІГ  Г­Г  Г®Г±Г­Г®ГўГҐ ГґГ Г©Г«Г®ГўГ®Г© Г§Г ГЇГЁГ±ГЁ
         public void CCustomer_account_Create_TEST()
         {
             Equal_Account(TestCustomer, "TestClient", 1000, 130, 240, 760, 320);
@@ -41,7 +41,7 @@ namespace Stock_Market_UnitTests
         [TestMethod]
         public void CCustomer_account_Deal_Sell_TEST()
         {
-            //Продажа бумаг C в колличестве 60 со счета клиента ценой 10$ за штуку
+            //ГЏГ°Г®Г¤Г Г¦Г  ГЎГіГ¬Г ГЈ C Гў ГЄГ®Г«Г«ГЁГ·ГҐГ±ГІГўГҐ 60 Г±Г® Г±Г·ГҐГІГ  ГЄГ«ГЁГҐГ­ГІГ  Г¶ГҐГ­Г®Г© 10$ Г§Г  ГёГІГіГЄГі
             // -60 C + 600(60*10)$
             TestCustomer.Deal(2, -60, 10);
             Equal_Account(TestCustomer, "TestClient", 1600, 130, 240, 700, 320);
@@ -49,7 +49,7 @@ namespace Stock_Market_UnitTests
         [TestMethod]
         public void CCustomer_account_Deal_Buy_TEST()
         {
-            //Покупка бумаг A в колличестве 70 штук ценой 10$ за штуку
+            //ГЏГ®ГЄГіГЇГЄГ  ГЎГіГ¬Г ГЈ A Гў ГЄГ®Г«Г«ГЁГ·ГҐГ±ГІГўГҐ 70 ГёГІГіГЄ Г¶ГҐГ­Г®Г© 10$ Г§Г  ГёГІГіГЄГі
             // +70 A - 700(70*10)$
             TestCustomer.Deal(0, 70, -10);
             Equal_Account(TestCustomer, "TestClient", 300, 200, 240, 760, 320);
@@ -61,13 +61,13 @@ namespace Stock_Market_UnitTests
         [TestMethod]
         public void COrder_Create_TEST()
         {
-            //Имя клиента, Стоимость за штуку, Колличество
+            //Г€Г¬Гї ГЄГ«ГЁГҐГ­ГІГ , Г‘ГІГ®ГЁГ¬Г®Г±ГІГј Г§Г  ГёГІГіГЄГі, ГЉГ®Г«Г«ГЁГ·ГҐГ±ГІГўГ®
             CController.COrder TestOrder = new CController.COrder("TestClient", 10, 20);
-            //Имя клиента
+            //Г€Г¬Гї ГЄГ«ГЁГҐГ­ГІГ 
             Assert.AreEqual(TestOrder.Name, "TestClient");
-            //Стоимость за штуку
+            //Г‘ГІГ®ГЁГ¬Г®Г±ГІГј Г§Г  ГёГІГіГЄГі
             Assert.AreEqual(TestOrder.Price, 10);
-            //Колличество
+            //ГЉГ®Г«Г«ГЁГ·ГҐГ±ГІГўГ®
             Assert.AreEqual(TestOrder.Count, 20);
         }
     }
@@ -78,21 +78,21 @@ namespace Stock_Market_UnitTests
         [TestMethod]
         public void CStock_Create_TEST()
         {
-            //Сток
+            //Г‘ГІГ®ГЄ
             Assert.AreEqual(TestStock.Stock, 1);
         }
         [TestMethod]
         public void CStock_Add_TEST()
         {
-            //Имя клиента, Стоимость за штуку, Колличество
+            //Г€Г¬Гї ГЄГ«ГЁГҐГ­ГІГ , Г‘ГІГ®ГЁГ¬Г®Г±ГІГј Г§Г  ГёГІГіГЄГі, ГЉГ®Г«Г«ГЁГ·ГҐГ±ГІГўГ®
             CController.COrder TestOrder = TestStock.Add("TestClient", 10, 20);
-            //Сток
+            //Г‘ГІГ®ГЄ
             Assert.AreEqual(TestStock.Stock, 1);
-            //Имя клиента
+            //Г€Г¬Гї ГЄГ«ГЁГҐГ­ГІГ 
             Assert.AreEqual(TestOrder.Name, "TestClient");
-            //Стоимость за штуку
+            //Г‘ГІГ®ГЁГ¬Г®Г±ГІГј Г§Г  ГёГІГіГЄГі
             Assert.AreEqual(TestOrder.Price, 10);
-            //Колличество
+            //ГЉГ®Г«Г«ГЁГ·ГҐГ±ГІГўГ®
             Assert.AreEqual(TestOrder.Count, 20);
         }
     }
@@ -103,23 +103,23 @@ namespace Stock_Market_UnitTests
         [TestMethod]
         public void CStock_Collection_Add_TEST()
         {
-            //Имя клиента,Сток, Стоимость за штуку, Колличество
+            //Г€Г¬Гї ГЄГ«ГЁГҐГ­ГІГ ,Г‘ГІГ®ГЄ, Г‘ГІГ®ГЁГ¬Г®Г±ГІГј Г§Г  ГёГІГіГЄГі, ГЉГ®Г«Г«ГЁГ·ГҐГ±ГІГўГ®
             TestStockCollection.Add("TestClient", 1, 10, 20);
-            //Сток
+            //Г‘ГІГ®ГЄ
             Assert.AreEqual(TestStockCollection.Stocks.Last().Stock, 1);
-            //Имя клиента
+            //Г€Г¬Гї ГЄГ«ГЁГҐГ­ГІГ 
             Assert.AreEqual(TestStockCollection.Stocks.Last().Orders.Last().Name, "TestClient");
-            //Стоимость за штуку
+            //Г‘ГІГ®ГЁГ¬Г®Г±ГІГј Г§Г  ГёГІГіГЄГі
             Assert.AreEqual(TestStockCollection.Stocks.Last().Orders.Last().Price, 10);
-            //Колличество
+            //ГЉГ®Г«Г«ГЁГ·ГҐГ±ГІГўГ®
             Assert.AreEqual(TestStockCollection.Stocks.Last().Orders.Last().Count, 20);
         }
         [TestMethod]
         public void CStock_Collection_FindByStock_TEST()
         {
-            //Имя клиента,Сток, Стоимость за штуку, Колличество
+            //Г€Г¬Гї ГЄГ«ГЁГҐГ­ГІГ ,Г‘ГІГ®ГЄ, Г‘ГІГ®ГЁГ¬Г®Г±ГІГј Г§Г  ГёГІГіГЄГі, ГЉГ®Г«Г«ГЁГ·ГҐГ±ГІГўГ®
             TestStockCollection.Add("", 1, 0, 0);
-            //Сток
+            //Г‘ГІГ®ГЄ
             Assert.AreEqual(TestStockCollection.Stocks.Last().Stock, 1);
         }
     }
@@ -130,7 +130,7 @@ namespace Stock_Market_UnitTests
         [TestMethod]
         public void CController_SaveLoadStrings_TEST()
         {
-            //Тест правильности сохранения\загрузки файла
+            //Г’ГҐГ±ГІ ГЇГ°Г ГўГЁГ«ГјГ­Г®Г±ГІГЁ Г±Г®ГµГ°Г Г­ГҐГ­ГЁГї\Г§Г ГЈГ°ГіГ§ГЄГЁ ГґГ Г©Г«Г 
             List<string> TestStrings = new List<string>();
             TestStrings.Add("C1	2760	0	0	0	0");
             TestStrings.Add("C2	4350	370	120	950	560");
@@ -162,17 +162,17 @@ namespace Stock_Market_UnitTests
             File.Delete("Test.txt");
             Assert.AreEqual(File.Exists("Test.txt"), false);
             CController.CCustomer_account pAccount = TestController.Accounts[0];
-            //Имя клиента
+            //Г€Г¬Гї ГЄГ«ГЁГҐГ­ГІГ 
             Assert.AreEqual(pAccount.Name, "TestClient");
-            //Счет в $
+            //Г‘Г·ГҐГІ Гў $
             Assert.AreEqual(pAccount.Money, 1000);
-            //Количество ценных бумаг A (0)
+            //ГЉГ®Г«ГЁГ·ГҐГ±ГІГўГ® Г¶ГҐГ­Г­Г»Гµ ГЎГіГ¬Г ГЈ A (0)
             Assert.AreEqual(pAccount.Stock[0], 130);
-            //Количество ценных бумаг B (1)
+            //ГЉГ®Г«ГЁГ·ГҐГ±ГІГўГ® Г¶ГҐГ­Г­Г»Гµ ГЎГіГ¬Г ГЈ B (1)
             Assert.AreEqual(pAccount.Stock[1], 240);
-            //Количество ценных бумаг C (2)
+            //ГЉГ®Г«ГЁГ·ГҐГ±ГІГўГ® Г¶ГҐГ­Г­Г»Гµ ГЎГіГ¬Г ГЈ C (2)
             Assert.AreEqual(pAccount.Stock[2], 760);
-            //Количество ценных бумаг D (3)
+            //ГЉГ®Г«ГЁГ·ГҐГ±ГІГўГ® Г¶ГҐГ­Г­Г»Гµ ГЎГіГ¬Г ГЈ D (3)
             Assert.AreEqual(pAccount.Stock[3], 320);
         }
         [TestMethod]
@@ -180,31 +180,31 @@ namespace Stock_Market_UnitTests
         {
             CController.COrder TestOrder = TestController.AddOrder("TestClient	b	C	15	4");
             Assert.AreEqual(TestOrder.Name, "TestClient");
-            //Стоимость за штуку
+            //Г‘ГІГ®ГЁГ¬Г®Г±ГІГј Г§Г  ГёГІГіГЄГі
             Assert.AreEqual(TestOrder.Price, 15);
-            //Колличество
+            //ГЉГ®Г«Г«ГЁГ·ГҐГ±ГІГўГ®
             Assert.AreEqual(TestOrder.Count, 4);
         }
         [TestMethod]
         public void CController_FindCustomerByName_TEST()
         {
             TestController.Accounts.Add(new CController.CCustomer_account("Jake	50	320	220	90	60"));
-            //Искомый счет
+            //Г€Г±ГЄГ®Г¬Г»Г© Г±Г·ГҐГІ
             TestController.Accounts.Add(new CController.CCustomer_account("FindClient	1	2	3	4	5"));
             TestController.Accounts.Add(new CController.CCustomer_account("Mike	43	30	520	10	540"));
             TestController.Accounts.Add(new CController.CCustomer_account("Other1	412	31	11	923	420"));
             CController.CCustomer_account pAccount = TestController.FindCustomerByName("FindClient");
-            //Имя клиента
+            //Г€Г¬Гї ГЄГ«ГЁГҐГ­ГІГ 
             Assert.AreEqual(pAccount.Name, "FindClient");
-            //Счет в $
+            //Г‘Г·ГҐГІ Гў $
             Assert.AreEqual(pAccount.Money, 1);
-            //Количество ценных бумаг A (0)
+            //ГЉГ®Г«ГЁГ·ГҐГ±ГІГўГ® Г¶ГҐГ­Г­Г»Гµ ГЎГіГ¬Г ГЈ A (0)
             Assert.AreEqual(pAccount.Stock[0], 2);
-            //Количество ценных бумаг B (1)
+            //ГЉГ®Г«ГЁГ·ГҐГ±ГІГўГ® Г¶ГҐГ­Г­Г»Гµ ГЎГіГ¬Г ГЈ B (1)
             Assert.AreEqual(pAccount.Stock[1], 3);
-            //Количество ценных бумаг C (2)
+            //ГЉГ®Г«ГЁГ·ГҐГ±ГІГўГ® Г¶ГҐГ­Г­Г»Гµ ГЎГіГ¬Г ГЈ C (2)
             Assert.AreEqual(pAccount.Stock[2], 4);
-            //Количество ценных бумаг D (3)
+            //ГЉГ®Г«ГЁГ·ГҐГ±ГІГўГ® Г¶ГҐГ­Г­Г»Гµ ГЎГіГ¬Г ГЈ D (3)
             Assert.AreEqual(pAccount.Stock[3], 5);
         }
         [TestMethod]
@@ -232,37 +232,37 @@ namespace Stock_Market_UnitTests
         [TestMethod]
         public void CController_Countin_TEST()
         {
-            //Тест Jake Продает 50 своих акций А 10$ за штуку, Mike их покупает
+            //Г’ГҐГ±ГІ Jake ГЏГ°Г®Г¤Г ГҐГІ 50 Г±ГўГ®ГЁГµ Г ГЄГ¶ГЁГ© ГЂ 10$ Г§Г  ГёГІГіГЄГі, Mike ГЁГµ ГЇГ®ГЄГіГЇГ ГҐГІ
             TestController.Accounts.Add(new CController.CCustomer_account("Jake	0	100	2	3	4"));
             TestController.Accounts.Add(new CController.CCustomer_account("Mike	501	1	2	3	4"));
             TestController.AddOrder("Jake	s	A	10	50");
             TestController.AddOrder("Mike	b	A	10	50");
             CController.CCustomer_account pAccount = TestController.FindCustomerByName("Jake");
             TestController.Countin(false, false);
-            //Имя клиента
+            //Г€Г¬Гї ГЄГ«ГЁГҐГ­ГІГ 
             Assert.AreEqual(pAccount.Name, "Jake");
-            //Счет в $
+            //Г‘Г·ГҐГІ Гў $
             Assert.AreEqual(pAccount.Money, 500);
-            //Количество ценных бумаг A (0)
+            //ГЉГ®Г«ГЁГ·ГҐГ±ГІГўГ® Г¶ГҐГ­Г­Г»Гµ ГЎГіГ¬Г ГЈ A (0)
             Assert.AreEqual(pAccount.Stock[0], 50);
-            //Количество ценных бумаг B (1)
+            //ГЉГ®Г«ГЁГ·ГҐГ±ГІГўГ® Г¶ГҐГ­Г­Г»Гµ ГЎГіГ¬Г ГЈ B (1)
             Assert.AreEqual(pAccount.Stock[1], 2);
-            //Количество ценных бумаг C (2)
+            //ГЉГ®Г«ГЁГ·ГҐГ±ГІГўГ® Г¶ГҐГ­Г­Г»Гµ ГЎГіГ¬Г ГЈ C (2)
             Assert.AreEqual(pAccount.Stock[2], 3);
-            //Количество ценных бумаг D (3)
+            //ГЉГ®Г«ГЁГ·ГҐГ±ГІГўГ® Г¶ГҐГ­Г­Г»Гµ ГЎГіГ¬Г ГЈ D (3)
             Assert.AreEqual(pAccount.Stock[3], 4);
             pAccount = TestController.FindCustomerByName("Mike");
-            //Имя клиента
+            //Г€Г¬Гї ГЄГ«ГЁГҐГ­ГІГ 
             Assert.AreEqual(pAccount.Name, "Mike");
-            //Счет в $
+            //Г‘Г·ГҐГІ Гў $
             Assert.AreEqual(pAccount.Money, 1);
-            //Количество ценных бумаг A (0)
+            //ГЉГ®Г«ГЁГ·ГҐГ±ГІГўГ® Г¶ГҐГ­Г­Г»Гµ ГЎГіГ¬Г ГЈ A (0)
             Assert.AreEqual(pAccount.Stock[0], 51);
-            //Количество ценных бумаг B (1)
+            //ГЉГ®Г«ГЁГ·ГҐГ±ГІГўГ® Г¶ГҐГ­Г­Г»Гµ ГЎГіГ¬Г ГЈ B (1)
             Assert.AreEqual(pAccount.Stock[1], 2);
-            //Количество ценных бумаг C (2)
+            //ГЉГ®Г«ГЁГ·ГҐГ±ГІГўГ® Г¶ГҐГ­Г­Г»Гµ ГЎГіГ¬Г ГЈ C (2)
             Assert.AreEqual(pAccount.Stock[2], 3);
-            //Количество ценных бумаг D (3)
+            //ГЉГ®Г«ГЁГ·ГҐГ±ГІГўГ® Г¶ГҐГ­Г­Г»Гµ ГЎГіГ¬Г ГЈ D (3)
             Assert.AreEqual(pAccount.Stock[3], 4);
         }
     }
